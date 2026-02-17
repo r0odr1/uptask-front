@@ -13,7 +13,7 @@ export default function CreateProjectView() {
     projectName: "",
     clientName: "",
     description: ""
-}
+  }
 
   const {register, handleSubmit, formState: {errors}} = useForm({defaultValues: initialValues})
 
