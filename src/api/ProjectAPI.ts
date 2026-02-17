@@ -1,5 +1,5 @@
 import api from "@/lib/axios";
-import { ProjectFormData } from "@/types/index";
+import { dashboardProjectSchema, ProjectFormData } from "@/types/index";
 import { isAxiosError } from "axios";
 
 
@@ -20,7 +20,12 @@ export async function getProjects() {
 
   try {
     const { data } = await api('/projects')
-    return data
+    const response = dashboardProjectSchema.safeParse(data)
+
+    if(response.success) {
+      return response.data
+    }
+
 
   } catch (error) {
     if(isAxiosError(error) && error.response) {
