@@ -3,6 +3,11 @@ import { dashboardProjectSchema, Project, ProjectFormData } from "@/types/index"
 import { isAxiosError } from "axios";
 
 
+type ProjectAPIType = {
+  formData: ProjectFormData
+  projectId: Project['_id']
+}
+
 export async function createProject(formData : ProjectFormData) {
 
   try {
@@ -38,8 +43,19 @@ export async function getProjectById(id: Project['_id']) {
 
   try {
     const { data } = await api(`/projects/${id}`)
-    console.log(data)
+    return data
 
+  } catch (error) {
+    if(isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error)
+    }
+  }
+}
+
+export async function updateProject({formData, projectId} : ProjectAPIType) {
+
+  try {
+    const { data } = await api.put<string>(`/projects/${projectId}`, formData)
     return data
 
   } catch (error) {
