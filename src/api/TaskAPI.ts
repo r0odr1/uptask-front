@@ -51,35 +51,17 @@ export async function updateTask({projectId, taskId, formData} : Pick<TaskAPI, '
   }
 }
 
-// export async function getTasks() {
+export async function deleteTask({projectId, taskId} : Pick<TaskAPI, 'projectId' | 'taskId'>) {
 
-//   try {
-//     const { data } = await api('/projects')
-//     const response = dashboardProjectSchema.safeParse(data)
+  try {
+    const url = `/projects/${projectId}/tasks/${taskId}`
+    const { data } = await api.delete<{message: string, task: Task}>(url)
+    return data
 
-//     if(response.success) {
-//       return response.data
-//     }
-
-
-//   } catch (error) {
-//     if(isAxiosError(error) && error.response) {
-//       throw new Error(error.response.data.error)
-//     }
-//   }
-// }
-
-
-
-// export async function deleteProject(id: Project['_id']) {
-
-//   try {
-//     const { data } = await api.delete<string>(`/projects/${id}`)
-//     return data
-
-//   } catch (error) {
-//     if(isAxiosError(error) && error.response) {
-//       throw new Error(error.response.data.error)
-//     }
-//   }
-// }
+  } catch (error) {
+    if(isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error)
+    }
+    throw new Error('Error al eliminar la tarea')
+  }
+}
