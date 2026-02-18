@@ -36,6 +36,21 @@ export async function getTaskById({projectId, taskId} : Pick<TaskAPI, 'projectId
   }
 }
 
+export async function updateTask({projectId, taskId, formData} : Pick<TaskAPI, 'projectId' | 'taskId' | 'formData'>) {
+
+  try {
+    const url = `/projects/${projectId}/tasks/${taskId}`
+    const { data } = await api.put<{message: string, task: Task}>(url, formData)
+    return data
+
+  } catch (error) {
+    if(isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error)
+    }
+    throw new Error('Error al actualizar la tarea')  // Lanza error genérico si no es AxiosError
+  }
+}
+
 // export async function getTasks() {
 
 //   try {
@@ -55,18 +70,6 @@ export async function getTaskById({projectId, taskId} : Pick<TaskAPI, 'projectId
 // }
 
 
-// export async function updateProject({formData, projectId} : ProjectAPIType) {
-
-//   try {
-//     const { data } = await api.put<string>(`/projects/${projectId}`, formData)
-//     return data
-
-//   } catch (error) {
-//     if(isAxiosError(error) && error.response) {
-//       throw new Error(error.response.data.error)
-//     }
-//   }
-// }
 
 // export async function deleteProject(id: Project['_id']) {
 
