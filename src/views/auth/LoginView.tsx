@@ -11,7 +11,9 @@ export default function LoginView() {
   }
   const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
 
-  const handleLogin = (formData: UserLoginForm) => { }
+  const handleLogin = (formData: UserLoginForm) => {
+    console.log(formData)
+  }
 
   return (
     <>
