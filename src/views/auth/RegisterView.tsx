@@ -1,7 +1,10 @@
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { useMutation } from '@tanstack/react-query'
 import { UserRegistrationForm } from "@/types/index";
 import ErrorMessage from "@/components/ErrorMessage";
-import { Link } from "react-router-dom";
+import { createAccount } from "@/api/AuthAPI";
+import { toast } from "react-toastify";
 
 export default function RegisterView() {
 
@@ -12,11 +15,22 @@ export default function RegisterView() {
     password_confirmation: '',
   }
 
-  const { register, handleSubmit, watch, reset, formState: { errors } } = useForm<UserRegistrationForm>({ defaultValues: initialValues });
+  const { register, handleSubmit, reset, control, formState: { errors } } = useForm<UserRegistrationForm>({ defaultValues: initialValues });
 
-  const password = watch('password');
+  const { mutate } = useMutation({
+    mutationFn: createAccount,
+    onError: (error) => {
+      toast.error(error.message)
+    },
+    onSuccess: (data) => {
+      toast.success(data)
+      reset()
+    }
+  })
 
-  const handleRegister = (formData: UserRegistrationForm) => {}
+  const password = useWatch({ control, name: 'password' });
+
+  const handleRegister = (formData: UserRegistrationForm) => mutate(formData)
 
   return (
     <>
@@ -42,7 +56,7 @@ export default function RegisterView() {
             placeholder="Email de Registro"
             className="w-full p-3 border-gray-300 border rounded-lg"
             {...register("email", {
-              required: "El Email de registro es obligatorio",
+              required: "El E-mail de registro es obligatorio",
               pattern: {
                 value: /\S+@\S+\.\S+/,
                 message: "E-mail no válido",
@@ -81,10 +95,10 @@ export default function RegisterView() {
             placeholder="Password de Registro"
             className="w-full p-3 border-gray-300 border rounded-lg"
             {...register("password", {
-              required: "El Password es obligatorio",
+              required: "La Contraseña es obligatoria",
               minLength: {
                 value: 8,
-                message: 'El Password debe ser mínimo de 8 caracteres'
+                message: 'La Contraseña debe ser mínimo de 8 caracteres'
               }
             })}
           />
@@ -101,11 +115,11 @@ export default function RegisterView() {
           <input
             id="password_confirmation"
             type="password"
-            placeholder="Repite Password de Registro"
+            placeholder="Repite Contraseña de Registro"
             className="w-full p-3 border-gray-300 border rounded-lg"
             {...register("password_confirmation", {
-              required: "Repetir Password es obligatorio",
-              validate: value => value === password || 'Los Passwords no son iguales'
+              required: "Repetir la Contraseña es obligatorio",
+              validate: value => value === password || 'Las Contraseñas ingresadas no son iguales'
             })}
           />
 
