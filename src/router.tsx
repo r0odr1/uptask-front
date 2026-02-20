@@ -7,6 +7,7 @@ import ProjectDetailsView from './views/projects/ProjectDetailsView'
 import AuthLayout from './layouts/AuthLayout'
 import LoginView from './views/auth/LoginView'
 import RegisterView from './views/auth/RegisterView'
+import ConfirmAccountView from './views/auth/ConfirmAccountView'
 
 export default function Router() {
 
@@ -23,6 +24,7 @@ export default function Router() {
         <Route element={<AuthLayout />} >
           <Route path='/auth/login' element={<LoginView />} index />
           <Route path='/auth/register' element={<RegisterView />} index />
+          <Route path='/auth/confirm-account' element={<ConfirmAccountView />} index />
         </Route>
 
       </Routes>
