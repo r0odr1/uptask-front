@@ -1,10 +1,16 @@
-import type { NewPasswordForm } from "../../types";
+import type { ConfirmToken, NewPasswordForm } from "../../types";
 import { useNavigate } from "react-router-dom";
 import { useForm, useWatch } from "react-hook-form";
 import ErrorMessage from "@/components/ErrorMessage";
+import { useMutation } from "@tanstack/react-query";
+import { updatePasswordWithToken } from "@/api/AuthAPI";
+import { toast } from "react-toastify";
 
+type NewPasswordFormProps = {
+  token: ConfirmToken['token']
+}
 
-export default function NewPasswordForm() {
+export default function NewPasswordForm({token} : NewPasswordFormProps) {
   const navigate = useNavigate()
   const initialValues: NewPasswordForm = {
     password: '',
@@ -13,8 +19,26 @@ export default function NewPasswordForm() {
 
   const { register, handleSubmit, control, reset, formState: { errors } } = useForm({ defaultValues: initialValues });
 
+  const { mutate } = useMutation({
+    mutationFn: updatePasswordWithToken,
+    onError: (error) => {
+      toast.error(error.message)
+    },
+    onSuccess: (data) => {
+      toast.success(data)
+      reset()
+      navigate('/auth/login')
+    }
+  })
 
-  const handleNewPassword = (formData: NewPasswordForm) => {}
+
+  const handleNewPassword = (formData: NewPasswordForm) => {
+    const data = {
+      formData,
+      token
+    }
+    mutate(data)
+  }
 
   const password = useWatch({ control, name: 'password' });
 
@@ -64,7 +88,7 @@ export default function NewPasswordForm() {
             className="w-full p-3 border-gray-300 border rounded-lg"
             {...register("password_confirmation", {
               required: "Repetir Password es obligatorio",
-              validate: value => value === password || 'Los Passwords no son iguales'
+              validate: value => value === password || 'Las Contraseñas ingresadas no son iguales'
             })}
           />
 
