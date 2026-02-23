@@ -1,10 +1,21 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, Navigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Logo from '@/components/Logo'
 import NavMenu from '@/components/NavMenu'
+import { useAuth } from '@/hooks/useAuth'
 
 export default function AppLayout() {
+
+  const { data, isError, isLoading } = useAuth()
+
+  if(isLoading) return 'Cargando...'
+  if(isError) {
+    return <Navigate to={'/auth/login'}/>
+  }
+
+
+
   return (
     <>
       <header className='bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-b border-white/5 shadow-sm py-5'>
