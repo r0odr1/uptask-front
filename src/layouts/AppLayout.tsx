@@ -14,8 +14,6 @@ export default function AppLayout() {
     return <Navigate to={'/auth/login'}/>
   }
 
-
-
   if(data) return (
     <>
       <header className='bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-b border-white/5 shadow-sm py-5'>
