@@ -16,7 +16,7 @@ export default function AppLayout() {
 
 
 
-  if (data) return (
+  if(data) return (
     <>
       <header className='bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-b border-white/5 shadow-sm py-5'>
         <div className='max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-between items-center'>
@@ -26,7 +26,9 @@ export default function AppLayout() {
             </Link>
           </div>
 
-          <NavMenu />
+          <NavMenu
+            name={data.name}
+          />
         </div>
       </header>
 
