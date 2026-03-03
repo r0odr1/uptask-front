@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { Dialog, DialogTitle, DialogPanel, TransitionChild, Transition } from '@headlessui/react';
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
@@ -7,6 +7,8 @@ import { toast } from 'react-toastify';
 import { formatDate } from '@/utils/utils';
 import { statusTranslations } from '@/locales/es';
 import { TaskStatus } from '@/types/index';
+import { ClockIcon } from '@heroicons/react/20/solid';
+import TaskHistoryModal from './TaskHistoryModal';
 
 export default function TaskModalDetails() {
 
@@ -18,6 +20,8 @@ export default function TaskModalDetails() {
   const taskId = queryParams.get('viewTask')!
 
   const show = taskId ? true : false
+
+  const [showHistory, setShowHistory] = useState(false)
 
   const queryClient = useQueryClient()
 
@@ -79,8 +83,18 @@ export default function TaskModalDetails() {
                 leaveTo="opacity-0 scale-95"
               >
                 <DialogPanel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16">
-                  <p className='text-sm text-slate-400'>Agregada el: {formatDate(data.createdAt)}</p>
-                  <p className='text-sm text-slate-400'>Última actualización: {formatDate(data.updatedAt)}</p>
+                  <div className="relative">
+                    <p className='text-sm text-slate-400'>Agregada el: {formatDate(data.createdAt)}</p>
+                    <p className='text-sm text-slate-400'>Última actualización: {formatDate(data.updatedAt)}</p>
+
+                    <div
+                      className="absolute top-0 right-0 cursor-pointer p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                      onClick={() => setShowHistory(true)}
+                      title="Ver historial"
+                    >
+                      <ClockIcon className="h-5 w-5 text-gray-600" />
+                    </div>
+                  </div>
 
                   <DialogTitle
                     as="h3"
@@ -90,17 +104,6 @@ export default function TaskModalDetails() {
                   </DialogTitle>
 
                   <p className='text-lg text-slate-500 mb-2'>Descripción: {data.description}</p>
-
-                  <p className='text-2xl text-slate-500 mb-2'>Historial de Cambios</p>
-
-                  <ul className=' list-decimal'>
-                    {data.completedBy.map((activityLog) => (
-                      <li key={activityLog._id}>
-                        <span className='font-bold text-slate-600'>{statusTranslations[activityLog.status]} por:</span>
-                        {' '} {activityLog.user.name}
-                      </li>
-                    ))}
-                  </ul>
 
                   <div className='my-5 space-y-3'>
                     <label className='font-bold'>Estado Actual: </label>
@@ -128,6 +131,12 @@ export default function TaskModalDetails() {
           </div>
         </Dialog>
       </Transition>
+
+      <TaskHistoryModal
+        show={showHistory}
+        onClose={() => setShowHistory(false)}
+        logs={data.completedBy}
+      />
     </>
   )
 }
