@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { Menu, Transition } from "@headlessui/react"
+import { Menu, MenuButton, MenuItem, MenuItems, Transition } from "@headlessui/react"
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -48,19 +48,19 @@ export default function TaskCard({task, canEdit} : TaskCardProps) {
 
       <div className="flex shrink-0  gap-x-6">
         <Menu as="div" className="relative flex-none">
-          <Menu.Button className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">
+          <MenuButton className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">
             <span className="sr-only">
               opciones
             </span>
             <EllipsisVerticalIcon className="h-9 w-9" aria-hidden="true" />
-          </Menu.Button>
+          </MenuButton>
 
           <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95"
             enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75"
             leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
-            <Menu.Items
+            <MenuItems
               className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-              <Menu.Item>
+              <MenuItem>
                 <button
                   type='button'
                   className='block px-3 py-1 text-sm leading-6 text-gray-900'
@@ -68,11 +68,11 @@ export default function TaskCard({task, canEdit} : TaskCardProps) {
                 >
                   Ver Tarea
                 </button>
-              </Menu.Item>
+              </MenuItem>
 
                {canEdit && (
                 <>
-                  <Menu.Item>
+                  <MenuItem>
                     <button
                       type='button'
                       className='block px-3 py-1 text-sm leading-6 text-gray-900'
@@ -80,19 +80,19 @@ export default function TaskCard({task, canEdit} : TaskCardProps) {
                     >
                       Editar Tarea
                     </button>
-                  </Menu.Item>
+                  </MenuItem>
 
-                  <Menu.Item>
+                  <MenuItem>
                     <button
                       type='button' className='block px-3 py-1 text-sm leading-6 text-red-500'
                       onClick={() => mutate({projectId,  taskId: task._id})}
                     >
                       Eliminar Tarea
                     </button>
-                  </Menu.Item>
+                  </MenuItem>
                 </>
                )}
-            </Menu.Items>
+            </MenuItems>
           </Transition>
         </Menu>
       </div>
