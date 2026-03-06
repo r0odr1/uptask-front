@@ -9,6 +9,7 @@ import { statusTranslations } from '@/locales/es';
 import { TaskStatus } from '@/types/index';
 import { ClockIcon } from '@heroicons/react/20/solid';
 import TaskHistoryModal from './TaskHistoryModal';
+import NotesPanel from '../notes/NotesPanel';
 
 export default function TaskModalDetails() {
 
@@ -125,6 +126,7 @@ export default function TaskModalDetails() {
                       ))}
                     </select>
                   </div>
+                  <NotesPanel />
                 </DialogPanel>
               </TransitionChild>
             </div>
