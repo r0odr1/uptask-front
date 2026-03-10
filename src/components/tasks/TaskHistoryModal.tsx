@@ -39,7 +39,7 @@ export default function TaskHistoryModal({ show, onClose, logs }: TaskHistoryMod
               <DialogPanel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-8">
                 <DialogTitle
                   as="h3"
-                  className="font-black text-3xl text-slate-600 mb-4"
+                  className="font-bold text-2xl text-slate-600 my-5"
                 >
                   Historial de Cambios
                 </DialogTitle>
