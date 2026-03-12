@@ -9,7 +9,6 @@ type NoteAPIType = {
   noteId: Note['_id']
 }
 
-
 export async function createNote({projectId, taskId, formData} : Pick<NoteAPIType, 'projectId' | 'taskId' | 'formData'>) {
   try {
     const url = `/projects/${projectId}/tasks/${taskId}/notes`
