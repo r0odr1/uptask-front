@@ -1,7 +1,7 @@
 import { useDroppable } from '@dnd-kit/core'
 
 type DropTaskProps = {
-  status: 'string'
+  status: string
 }
 export default function DropTask({status} : DropTaskProps) {
 
