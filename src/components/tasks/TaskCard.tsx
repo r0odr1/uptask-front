@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Task } from "@/types/index"
 import { deleteTask } from '@/api/TaskAPI'
 import { toast } from 'react-toastify'
+import { useDraggable } from '@dnd-kit/core'
 
 type TaskCardProps = {
   task: Task
@@ -13,6 +14,10 @@ type TaskCardProps = {
 }
 
 export default function TaskCard({task, canEdit} : TaskCardProps) {
+
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: task._id
+  })
 
   const navigate = useNavigate()
   const params = useParams()
@@ -31,9 +36,20 @@ export default function TaskCard({task, canEdit} : TaskCardProps) {
     }
   })
 
+  const style = transform ? {
+    transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`
+
+  } : undefined
+
   return (
     <li className="p-5 bg-white border borde-slate-300 flex justify-between gap-3 rounded-lg">
-      <div className="min-w-0 flex flex-col gap-y-4">
+      <div
+        {...listeners}
+        {...attributes}
+        ref={setNodeRef}
+        style={style}
+        className="min-w-0 flex flex-col gap-y-4"
+      >
         <button
           type="button"
           className="text-xl font-bold text-slate-600 text-left"
