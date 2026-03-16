@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+# TypeScript build info
+*.tsbuildinfo
+tsconfig.*.tsbuildinfo
+
+# Vite config compilada
+vite.config.d.ts
+vite.config.js
+
 # Environment variables
 .env
 .env.local
