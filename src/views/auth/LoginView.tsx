@@ -1,9 +1,9 @@
-import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { useMutation } from '@tanstack/react-query'
-import { UserLoginForm } from "@/types/index";
 import { authenticateUser } from "@/api/AuthAPI";
 import ErrorMessage from "@/components/ErrorMessage";
+import { UserLoginForm } from "@/types/index";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function LoginView() {
@@ -15,6 +15,7 @@ export default function LoginView() {
   const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
 
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
 
   const { mutate } = useMutation({
     mutationFn: authenticateUser,
@@ -22,6 +23,7 @@ export default function LoginView() {
       toast.error(error.message)
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ['user']})
       navigate('/')
     }
   })
@@ -31,25 +33,25 @@ export default function LoginView() {
   return (
     <>
       <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white">Iniciar Sesión</h1>
-      <p className="text-base sm:text-lg lg:text-2xl font-light text-white/80 mt-5">
-        Comienza a plenear tus proyectos {''}
-        <span className="text-gradient-primary font-bold"> iniciando sesión en este formulario</span>
+      <p className="text-base sm:text-lg lg:text-2xl font-light text-white mt-5">
+        Comienza a plenear tus prouectos {''}
+        <span className=" text-fuchsia-500 font-bold"> iniciando sesión en este formulario</span>
       </p>
       <form
         onSubmit={handleSubmit(handleLogin)}
-        className="glass-panel space-y-6 sm:space-y-8 p-6 sm:p-10 mt-8 relative"
+        className="space-y-6 sm:space-y-8 p-6 sm:p-10 mt-3 bg-white rounded-lg"
         noValidate
       >
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-3 sm:gap-5">
           <label
-            className="font-semibold text-lg sm:text-xl text-white"
+            className="font-normal text-lg sm:text-xl lg:text-2xl"
           >Email</label>
 
           <input
             id="email"
             type="email"
             placeholder="Email de Registro"
-            className="input-modern w-full p-3 sm:p-3 text-sm sm:text-base"
+            className="w-full p-2 sm:p-3 border-gray-300 border rounded-lg text-sm sm:text-base"
             {...register("email", {
               required: "El Email es obligatorio",
               pattern: {
@@ -63,15 +65,15 @@ export default function LoginView() {
           )}
         </div>
 
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-3 sm:gap-5">
           <label
-            className="font-semibold text-lg sm:text-xl text-white"
-          >Contraseña</label>
+            className="font-normal text-lg sm:text-xl lg:text-2xl"
+          >Password</label>
 
           <input
             type="password"
-            placeholder="Contraseña de Registro"
-            className="input-modern w-full p-3 sm:p-3 text-sm sm:text-base text-white"
+            placeholder="Password de Registro"
+            className="w-full p-2 sm:p-3 border-gray-300 border rounded-lg text-sm sm:text-base"
             {...register("password", {
               required: "El Password es obligatorio",
             })}
@@ -84,21 +86,21 @@ export default function LoginView() {
         <input
           type="submit"
           value='Iniciar Sesión'
-          className="btn-primary w-full p-3 sm:p-4 text-white font-black text-base sm:text-lg lg:text-xl cursor-pointer"
+          className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-2 sm:p-3 text-white font-black text-base sm:text-lg lg:text-xl cursor-pointer rounded-lg"
         />
       </form>
 
-      <nav className="mt-10 flex flex-col space-y-4">
+      <nav className="mt-8 sm:mt-10 flex flex-col space-y-3 sm:space-y-4">
         <Link
           to={'/auth/register'}
-          className="text-center text-white/70 hover:text-white font-normal text-sm sm:text-base transition-colors"
+          className="text-center text-gray-300 font-normal text-sm sm:text-base"
         >
           ¿No tienes una cuenta? <span className="text-gradient-primary font-bold">Crear Una</span>
         </Link>
 
         <Link
           to={'/auth/forgot-password'}
-          className="text-center text-white/70 hover:text-white font-normal text-sm sm:text-base transition-colors"
+          className="text-center text-gray-300 font-normal text-sm sm:text-base"
         >
           ¿Olvidaste tu contraseña? <span className="text-gradient-primary font-bold">Reestablecer</span>
         </Link>
