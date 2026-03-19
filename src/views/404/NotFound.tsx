@@ -7,7 +7,7 @@ export default function NotFound() {
       <p className="mt-10 text-center text-white">
         Tak vez quieras volver a {' '}
         <Link
-          className=" text-fuchsia-500"
+          className="text-gradient-brand "
           to={'/'}>
             Proyectos
         </Link>

@@ -73,37 +73,37 @@ return (
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16">
+            <Dialog.Panel className="glass-panel w-full max-w-2xl transform overflow-hidden text-left align-middle shadow-2xl transition-all p-10 rounded-2xl border border-white/20">
 
               <Dialog.Title
                 as="h3"
-                className="font-black text-4xl  my-5"
+                className="font-black text-4xl text-gradient-primary mb-2"
               >
                 Eliminar Proyecto
               </Dialog.Title>
 
-              <p className="text-xl font-bold">Confirma la eliminación del proyecto {''}
-                <span className="text-fuchsia-600">colocando tu contraseña</span>
+              <p className="text-lg font-semibold text-white/90 mb-8">Confirma la eliminación del proyecto {''}
+                <span className="text-brandAccent-400 font-bold"> colocando tu contraseña</span>
               </p>
 
               <form
-                className="mt-10 space-y-5"
+                className="space-y-6"
                 onSubmit={handleSubmit(handleForm)}
                 noValidate
               >
 
                 <div className="flex flex-col gap-3">
                   <label
-                      className="font-normal text-2xl"
+                      className="font-semibold text-lg text-white"
                       htmlFor="password"
                   >
-                    Contaseña
+                    Contraseña
                   </label>
                   <input
                     id="password"
                     type="password"
                     placeholder="Contraseña Inicio de Sesión"
-                    className="w-full p-3 border-gray-300 border rounded-lg"
+                    className="input-modern w-full p-3 text-base"
                     {...register("password", {
                         required: "La Contraseña es obligatoria",
                     })}
@@ -115,7 +115,7 @@ return (
 
                 <input
                     type="submit"
-                    className=" bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 text-white font-black  text-xl cursor-pointer rounded-lg"
+                    className="btn-primary w-full p-4 text-white font-black text-lg cursor-pointer transition-all hover:scale-105"
                     value='Eliminar Proyecto'
                 />
               </form>

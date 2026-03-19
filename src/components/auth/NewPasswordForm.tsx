@@ -1,10 +1,10 @@
-import type { ConfirmToken, NewPasswordForm } from "../../types";
-import { useNavigate } from "react-router-dom";
-import { useForm, useWatch } from "react-hook-form";
+import { updatePasswordWithToken } from "@/api/AuthAPI";
 import ErrorMessage from "@/components/ErrorMessage";
 import { useMutation } from "@tanstack/react-query";
-import { updatePasswordWithToken } from "@/api/AuthAPI";
+import { useForm, useWatch } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import type { ConfirmToken, NewPasswordForm } from "../../types";
 
 type NewPasswordFormProps = {
   token: ConfirmToken['token']
@@ -54,7 +54,7 @@ export default function NewPasswordForm({token} : NewPasswordFormProps) {
           <label
             className="font-normal text-2xl"
           >
-            Password
+            Contraseña
           </label>
 
           <input
@@ -62,10 +62,10 @@ export default function NewPasswordForm({token} : NewPasswordFormProps) {
             placeholder="Password de Registro"
             className="w-full p-3 border-gray-300 border rounded-lg"
             {...register("password", {
-                required: "El Password es obligatorio",
+                required: "La Contraseña es obligatoria",
                 minLength: {
                   value: 8,
-                  message: 'El Password debe ser mínimo de 8 caracteres'
+                  message: 'La Contraseña debe ser mínimo de 8 caracteres'
                 }
             })}
           />
@@ -78,7 +78,7 @@ export default function NewPasswordForm({token} : NewPasswordFormProps) {
           <label
             className="font-normal text-2xl"
           >
-            Repetir Password
+            Repetir Contraseña
           </label>
 
           <input
@@ -87,7 +87,7 @@ export default function NewPasswordForm({token} : NewPasswordFormProps) {
             placeholder="Repite Password de Registro"
             className="w-full p-3 border-gray-300 border rounded-lg"
             {...register("password_confirmation", {
-              required: "Repetir Password es obligatorio",
+              required: "Repetir la Contraseña es obligatorio",
               validate: value => value === password || 'Las Contraseñas ingresadas no son iguales'
             })}
           />
@@ -100,7 +100,7 @@ export default function NewPasswordForm({token} : NewPasswordFormProps) {
         <input
           type="submit"
           value='Establecer Password'
-          className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 text-white font-black  text-xl cursor-pointer rounded-lg"
+          className="btn-primary w-full p-3 text-white font-black text-xl cursor-pointer transition-all"
         />
       </form>
     </>

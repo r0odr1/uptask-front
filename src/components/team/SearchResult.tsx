@@ -39,17 +39,25 @@ export default function SearchResult({user, reset} : SearchResultProps) {
 
   return (
     <>
-      <p className="mt-10 text-center font-bold">Resultado:</p>
-      <div className="flex justify-between items-center">
-        <p>{user.name}</p>
-        <p>{user.email}</p>
+      <p className="mt-10 text-center font-bold text-white mb-6">Resultado:</p>
+      <div className="bg-neutral-700 rounded-xl p-6 shadow-lg border border-neutral-600">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+          <div className="flex flex-col gap-2">
+            <p className="text-sm text-neutral-400">Nombre</p>
+            <p className="text-lg font-semibold text-white">{user.name}</p>
+          </div>
+          <div className="flex flex-col gap-2">
+            <p className="text-sm text-neutral-400">Correo</p>
+            <p className="text-lg font-semibold text-white truncate">{user.email}</p>
+          </div>
 
-        <button
-          className="text-purple-600 hover:bg-purple-100 px-10 py-3 font-bold cursor-pointer rounded-lg"
-          onClick={handleAddUserToProject}
-        >
-          Agregar al proyecto
-        </button>
+          <button
+            className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md mt-4 sm:mt-0 whitespace-nowrap"
+            onClick={handleAddUserToProject}
+          >
+            Agregar al proyecto
+          </button>
+        </div>
       </div>
     </>
   )
