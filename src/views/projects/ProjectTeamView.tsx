@@ -45,7 +45,7 @@ export default function ProjectTeamView() {
       <nav className="my-5 flex gap-3">
         <button
           type="button"
-          className="bg-purple-400 hover:bg-purple-500 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors rounded-lg"
+          className="btn-secondary px-10 py-3 text-white text-xl font-bold cursor-pointer transition-all"
           onClick={() => navigate(location.pathname + '?addMember=true')}
         >
           Agregar Colaborador
@@ -53,7 +53,7 @@ export default function ProjectTeamView() {
 
         <Link
           to={`/projects/${projectId}`}
-          className="bg-fuchsia-600 hover:bg-fuchsia-700 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors rounded-lg"
+          className="btn-primary px-10 py-3 text-white text-xl font-bold cursor-pointer transition-all"
         >
           Volver a Proyecto
         </Link>

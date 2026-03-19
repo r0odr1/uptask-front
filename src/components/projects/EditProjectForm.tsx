@@ -1,10 +1,10 @@
-import { Project, ProjectFormData } from "@/types/index";
-import ProjectForm from "./ProjectForm";
-import { Link, useNavigate } from "react-router-dom"
-import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { updateProject } from "@/api/ProjectAPI";
+import { Project, ProjectFormData } from "@/types/index";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import ProjectForm from "./ProjectForm";
 
 type EditProjectFormProps = {
   data: ProjectFormData
@@ -53,7 +53,7 @@ export default function EditProjectForm({data, projectId} : EditProjectFormProps
 
         <nav className="my-5">
           <Link
-            className="bg-purple-400 hover:bg-purple-500 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors rounded-lg"
+            className="bg-brandAccent-400 hover:bg-brandAccent-500 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors rounded-lg"
             to='/'
           >
             Volver a Proyectos
@@ -75,7 +75,7 @@ export default function EditProjectForm({data, projectId} : EditProjectFormProps
           <input
             type="submit"
             value='Guardar Cambios'
-            className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 text-white uppercase font-bold cursor-pointer transition-colors rounded-lg"
+            className="btn-primary w-full p-3 text-white uppercase font-bold cursor-pointer transition-all"
           />
         </form>
       </div>

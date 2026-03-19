@@ -1,12 +1,12 @@
-import { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
-import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
-import { Link, useLocation, useNavigate } from "react-router-dom"
-import { useQuery } from '@tanstack/react-query'
 import { getProjects } from "@/api/ProjectAPI"
+import DeleteProjectModal from '@/components/projects/DeleteProjectModal'
 import { useAuth } from '@/hooks/useAuth'
 import { isManager } from '@/utils/polices'
-import DeleteProjectModal from '@/components/projects/DeleteProjectModal'
+import { Menu, Transition } from '@headlessui/react'
+import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
+import { useQuery } from '@tanstack/react-query'
+import { Fragment } from 'react'
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
 export default function DashboardView() {
 
@@ -29,7 +29,7 @@ export default function DashboardView() {
 
       <nav className="my-5">
         <Link
-          className="bg-purple-400 hover:bg-purple-500 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors rounded-lg"
+          className="btn-link px-10 py-3 text-white text-xl font-bold cursor-pointer transition-all"
           to='/projects/create'
         >
           Nuevo Proyecto
@@ -115,7 +115,7 @@ export default function DashboardView() {
           No hay proyectos aun {''}
           <Link
             to='/projects/create'
-            className="text-fuchsia-500 font-bold"
+            className="text-gradient-brand font-bold"
           >
             Crear Proyecto
           </Link>

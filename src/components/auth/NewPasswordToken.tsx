@@ -34,10 +34,10 @@ export default function NewPasswordToken({token, setToken, setIsValidToken} : Ne
   return (
     <>
       <form
-        className="space-y-8 p-10 rounded-lg bg-white mt-10"
+        className="glass-panel space-y-8 p-10 rounded-lg bg-white mt-10"
       >
         <label
-          className="font-normal text-2xl text-center block"
+          className="font-normal text-white text-2xl text-center block"
         >
           Código de 6 dígitos
         </label>
@@ -56,7 +56,7 @@ export default function NewPasswordToken({token, setToken, setIsValidToken} : Ne
       <nav className="mt-10 flex flex-col space-y-4">
         <Link
           to='/auth/forgot-password'
-          className="text-center text-gray-300 font-normal"
+          className="text-center text-white/70 hover:text-white font-normal text-sm sm:text-base transition-colors"
         >
           Solicitar un nuevo Código
         </Link>
