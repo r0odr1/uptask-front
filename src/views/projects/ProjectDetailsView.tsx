@@ -38,7 +38,7 @@ export default function ProjectDetailsView() {
         <nav className="my-5 flex gap-3">
           <button
             type="button"
-            className="bg-purple-400 hover:bg-purple-500 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors rounded-lg"
+            className="btn-secondary px-10 py-3 text-white text-xl font-bold cursor-pointer transition-all"
             onClick={() => navigate(location.pathname + '?newTask=true')}
           >
             Agregar Tarea
@@ -46,7 +46,7 @@ export default function ProjectDetailsView() {
 
           <Link
             to={'team'}
-            className="bg-fuchsia-600 hover:bg-fuchsia-700 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors rounded-lg"
+            className="btn-primary px-10 py-3 text-white text-xl font-bold cursor-pointer transition-all"
           >
             Colaboradores
           </Link>

@@ -79,16 +79,16 @@ export default function AddTaskModal() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-16">
+                <Dialog.Panel className="glass-panel w-full max-w-4xl transform overflow-hidden text-left align-middle shadow-2xl transition-all p-16">
                   <Dialog.Title
                       as="h3"
-                      className="font-black text-4xl  my-5"
+                      className="font-black text-4xl text-gradient-primary my-5"
                   >
                     Nueva Tarea
                   </Dialog.Title>
 
-                  <p className="text-xl font-bold">Llena el formulario y crea  {''}
-                    <span className="text-fuchsia-600">una tarea</span>
+                  <p className="text-xl font-bold text-white/90">Llena el formulario y crea  {''}
+                    <span className="text-gradient-brand">una tarea</span>
                   </p>
 
                   <form
@@ -106,7 +106,7 @@ export default function AddTaskModal() {
                     <input
                       type="submit"
                       value='Guardar Tarea'
-                      className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 text-white uppercase font-bold cursor-pointer transition-colors rounded-lg"
+                      className="btn-primary w-full p-3 text-white uppercase font-bold cursor-pointer transition-all"
                     />
                   </form>
                 </Dialog.Panel>

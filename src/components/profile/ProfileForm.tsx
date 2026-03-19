@@ -1,9 +1,9 @@
-import { User, UserProfileForm } from "@/types/index"
-import { useForm } from "react-hook-form"
-import ErrorMessage from "../ErrorMessage"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { updateProfile } from "@/api/ProfileAPI"
+import { User, UserProfileForm } from "@/types/index"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useForm } from "react-hook-form"
 import { toast } from "react-toastify"
+import ErrorMessage from "../ErrorMessage"
 
 type ProfileFormProps = {
   data: User
@@ -59,17 +59,17 @@ export default function ProfileForm({ data } :  ProfileFormProps) {
               <label
                 className="text-sm uppercase font-bold"
                 htmlFor="password"
-              >E-mail</label>
+              >Correo</label>
               <input
                 id="text"
                 type="email"
-                placeholder="Tu Email"
-                className="w-full p-3  border border-gray-200 rounded-lg"
+                placeholder="Tu Correo"
+                className="w-full p-3 border border-gray-200 rounded-lg"
                 {...register("email", {
-                    required: "EL e-mail es obligatorio",
+                    required: "EL Correo es obligatorio",
                     pattern: {
                         value: /\S+@\S+\.\S+/,
-                        message: "E-mail no válido",
+                        message: "Correo no válido",
                     },
                 })}
               />
@@ -80,7 +80,7 @@ export default function ProfileForm({ data } :  ProfileFormProps) {
             <input
               type="submit"
               value='Guardar Cambios'
-              className="bg-fuchsia-600 w-full p-3 text-white uppercase font-bold hover:bg-fuchsia-700 cursor-pointer transition-colors rounded-lg"
+              className="btn-primary w-full p-3 text-white uppercase font-bold cursor-pointer transition-all"
             />
             </form>
           </div>

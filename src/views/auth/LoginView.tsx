@@ -95,14 +95,14 @@ export default function LoginView() {
           to={'/auth/register'}
           className="text-center text-gray-300 font-normal text-sm sm:text-base"
         >
-          ¿No tienes una cuenta? Crear Una
+          ¿No tienes una cuenta? <span className="text-gradient-primary font-bold">Crear Una</span>
         </Link>
 
         <Link
           to={'/auth/forgot-password'}
           className="text-center text-gray-300 font-normal text-sm sm:text-base"
         >
-          ¿Olvidaste tu contraseña? Reestablecer
+          ¿Olvidaste tu contraseña? <span className="text-gradient-primary font-bold">Reestablecer</span>
         </Link>
       </nav>
     </>
